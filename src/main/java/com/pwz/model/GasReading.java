@@ -9,26 +9,26 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class GasReading implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private int readingId;
 	private int gasAcctId;
 	private String username;
 	private int reading;
 	private Date readDate;
-	
+
 	public int getReadingId() {
 		return readingId;
 	}
-	
-	public void setReadingId(int readingId) {
+
+	public void setReadingId(final int readingId) {
 		this.readingId = readingId;
 	}
-	
+
 	public int getGasAcctId() {
 		return gasAcctId;
 	}
-	
-	public void setGasAcctId(int gasAcctId) {
+
+	public void setGasAcctId(final int gasAcctId) {
 		this.gasAcctId = gasAcctId;
 	}
 
@@ -36,23 +36,23 @@ public class GasReading implements Serializable {
 		return username;
 	}
 
-	public void setUsername(String username) {
+	public void setUsername(final String username) {
 		this.username = username;
 	}
-	
+
 	public int getReading() {
 		return reading;
 	}
-	
-	public void setReading(int reading) {
+
+	public void setReading(final int reading) {
 		this.reading = reading;
 	}
-	
+
 	public Date getReadDate() {
 		return readDate;
 	}
-	
-	public void setReadDate(Date readDate) {
+
+	public void setReadDate(final Date readDate) {
 		this.readDate = readDate;
 	}
 

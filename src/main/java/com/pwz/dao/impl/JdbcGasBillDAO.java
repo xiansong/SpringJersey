@@ -16,15 +16,15 @@ import com.pwz.model.GasBill;
 /**
  * @author Green Lens
  * 
- *         DAO layer doesn't handle Data Access Exception,throw it to front end(rest
- *         services) to handle it
+ *         DAO layer doesn't handle Data Access Exception,throw it to front
+ *         end(rest services) to handle it
  * 
  */
 
 public class JdbcGasBillDAO extends NamedParameterJdbcDaoSupport implements
 		GasBillDAO {
 
-	public int addBill(GasBill bill) {
+	public int addBill(final GasBill bill) {
 		StringBuffer sqlSB = new StringBuffer();
 		sqlSB.append("INSERT INTO gas_bill (gasAcctId, bill, issuedDate) ");
 		sqlSB.append("VALUES (:gasAcctId, :bill, :issuedDate)");
@@ -36,7 +36,7 @@ public class JdbcGasBillDAO extends NamedParameterJdbcDaoSupport implements
 		return generatedKeyHolder.getKey().intValue();
 	}
 
-	public GasBill getBill(int billId) {
+	public GasBill getBill(final int billId) {
 		StringBuffer sqlSB = new StringBuffer();
 		sqlSB.append("SELECT B.billId, B.gasAcctId, U.username, B.bill, B.issuedDate ");
 		sqlSB.append("FROM gas_bill AS B INNER JOIN gas_account AS A INNER JOIN user AS U ");
@@ -48,7 +48,7 @@ public class JdbcGasBillDAO extends NamedParameterJdbcDaoSupport implements
 				paramSource, new BeanPropertyRowMapper<GasBill>(GasBill.class));
 	}
 
-	public List<GasBill> getBills(int acctId) {
+	public List<GasBill> getBills(final int acctId) {
 		StringBuffer sqlSB = new StringBuffer();
 		sqlSB.append("SELECT B.billId, B.gasAcctId, U.username, B.bill, B.issuedDate ");
 		sqlSB.append("FROM gas_bill AS B INNER JOIN gas_account AS A INNER JOIN user AS U ");
@@ -60,7 +60,7 @@ public class JdbcGasBillDAO extends NamedParameterJdbcDaoSupport implements
 				paramSource, new BeanPropertyRowMapper<GasBill>(GasBill.class));
 	}
 
-	public void delete(int billId) {
+	public void delete(final int billId) {
 		String sql = "DELETE FROM gas_bill WHERE billId = :billId";
 		SqlParameterSource paramSource = new MapSqlParameterSource("billId",
 				billId);

@@ -36,7 +36,7 @@ public class ElecAcctService {
 	@GET
 	@Path("{acctId}")
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-	public Response getAccount(@PathParam("acctId") int acctId) {
+	public Response getAccount(@PathParam("acctId") final int acctId) {
 		try {
 			ElecAccount account = elecDAO.getAccount(acctId);
 			if (account.getUsername().equals(
@@ -57,7 +57,7 @@ public class ElecAcctService {
 	@GET
 	@Path("user/{userId}")
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-	public Response getAccounts(@PathParam("userId") int userId) {
+	public Response getAccounts(@PathParam("userId") final int userId) {
 		try {
 			if (!SecurityContextHolder.getContext().getAuthentication()
 					.getName().equals(userDAO.getUser(userId).getUsername())) {
@@ -83,7 +83,7 @@ public class ElecAcctService {
 	@POST
 	@Path("add")
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response register(@FormParam("userId") int userId,
+	public Response register(@FormParam("userId") final int userId,
 			@FormParam("companyName") String companyName,
 			@FormParam("acctNumber") String acctNumber,
 			@FormParam("MPRN") long MPRN) {
@@ -116,7 +116,7 @@ public class ElecAcctService {
 
 	@PUT
 	@Path("update")
-	public Response update(@FormParam("acctId") int acctId,
+	public Response update(@FormParam("acctId") final int acctId,
 			@FormParam("companyName") String companyName,
 			@FormParam("acctNumber") String acctNumber,
 			@FormParam("MPRN") long MPRN) {
@@ -147,7 +147,7 @@ public class ElecAcctService {
 	@DELETE
 	@Path("delete/{acctId}")
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response removeUser(@PathParam("acctId") int acctId) {
+	public Response removeUser(@PathParam("acctId") final int acctId) {
 		try {
 			if (!SecurityContextHolder.getContext().getAuthentication()
 					.getName().equals(elecDAO.getAccount(acctId).getUsername())) {

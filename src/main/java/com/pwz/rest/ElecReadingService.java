@@ -35,10 +35,10 @@ public class ElecReadingService {
 	@POST
 	@Path("add")
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response add(@FormParam("elecAcctId") int elecAcctId,
-			@FormParam("dayReading") int dayReading,
-			@FormParam("nightReading") int nightReading,
-			@FormParam("readDate") Date readDate) {
+	public Response add(@FormParam("elecAcctId") final int elecAcctId,
+			@FormParam("dayReading") final int dayReading,
+			@FormParam("nightReading") final int nightReading,
+			@FormParam("readDate") final Date readDate) {
 		try {
 			if (!SecurityContextHolder.getContext().getAuthentication()
 					.getName()
@@ -67,7 +67,7 @@ public class ElecReadingService {
 	@GET
 	@Path("{readingId}")
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-	public Response getReading(@PathParam("readingId") int readingId) {
+	public Response getReading(@PathParam("readingId") final int readingId) {
 		try {
 			ElecReading reading = elecRDAO.getReading(readingId);
 			if (reading.getUsername().equals(
@@ -88,7 +88,7 @@ public class ElecReadingService {
 	@GET
 	@Path("account/{elecAcctId}")
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-	public Response getReadings(@PathParam("elecAcctId") int elecAcctId) {
+	public Response getReadings(@PathParam("elecAcctId") final int elecAcctId) {
 		try {
 			if (!SecurityContextHolder.getContext().getAuthentication()
 					.getName()
@@ -115,7 +115,7 @@ public class ElecReadingService {
 
 	@DELETE
 	@Path("delete/{readingId}")
-	public Response removeReading(@PathParam("readingId") int readingId) {
+	public Response removeReading(@PathParam("readingId") final int readingId) {
 		try {
 			if (!SecurityContextHolder.getContext().getAuthentication()
 					.getName()

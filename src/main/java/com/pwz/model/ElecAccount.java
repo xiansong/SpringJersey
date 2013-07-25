@@ -19,7 +19,7 @@ public class ElecAccount implements Serializable{
 		return elecAcctId;
 	}
 	
-	public void setElecAcctId(int elecAcctId) {
+	public void setElecAcctId(final int elecAcctId) {
 		this.elecAcctId = elecAcctId;
 	}
 	
@@ -27,7 +27,7 @@ public class ElecAccount implements Serializable{
 		return userId;
 	}
 	
-	public void setUserId(int userId) {
+	public void setUserId(final int userId) {
 		this.userId = userId;
 	}
 
@@ -35,7 +35,7 @@ public class ElecAccount implements Serializable{
 		return username;
 	}
 
-	public void setUsername(String username) {
+	public void setUsername(final String username) {
 		this.username = username;
 	}
 	
@@ -43,7 +43,7 @@ public class ElecAccount implements Serializable{
 		return acctNumber;
 	}
 	
-	public void setAcctNumber(String acctNumber) {
+	public void setAcctNumber(final String acctNumber) {
 		this.acctNumber = acctNumber;
 	}
 	
@@ -51,7 +51,7 @@ public class ElecAccount implements Serializable{
 		return companyName;
 	}
 	
-	public void setCompanyName(String companyName) {
+	public void setCompanyName(final String companyName) {
 		this.companyName = companyName;
 	}
 	
@@ -59,7 +59,7 @@ public class ElecAccount implements Serializable{
 		return MPRN;
 	}
 	
-	public void setMPRN(long MPRN) {
+	public void setMPRN(final long MPRN) {
 		this.MPRN = MPRN;
 	}
 	

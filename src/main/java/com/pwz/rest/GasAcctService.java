@@ -36,7 +36,7 @@ public class GasAcctService {
 	@GET
 	@Path("{acctId}")
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-	public Response getAccount(@PathParam("acctId") int acctId) {
+	public Response getAccount(@PathParam("acctId") final int acctId) {
 		try {
 			GasAccount account = gasDAO.getAccount(acctId);
 			if (account.getUsername().equals(
@@ -57,7 +57,7 @@ public class GasAcctService {
 	@GET
 	@Path("user/{userId}")
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-	public Response getAccounts(@PathParam("userId") int userId) {
+	public Response getAccounts(@PathParam("userId") final int userId) {
 		try {
 			if (!SecurityContextHolder.getContext().getAuthentication()
 					.getName().equals(userDAO.getUser(userId).getUsername())) {
@@ -82,10 +82,10 @@ public class GasAcctService {
 	@POST
 	@Path("add")
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response register(@FormParam("userId") int userId,
-			@FormParam("companyName") String companyName,
-			@FormParam("acctNumber") String acctNumber,
-			@FormParam("GPRN") long GPRN) {
+	public Response register(@FormParam("userId") final int userId,
+			@FormParam("companyName") final String companyName,
+			@FormParam("acctNumber") final String acctNumber,
+			@FormParam("GPRN") final long GPRN) {
 		try {
 			if (!SecurityContextHolder.getContext().getAuthentication()
 					.getName().equals(userDAO.getUser(userId).getUsername())) {
@@ -113,10 +113,10 @@ public class GasAcctService {
 
 	@PUT
 	@Path("update")
-	public Response update(@FormParam("acctId") int acctId,
-			@FormParam("companyName") String companyName,
-			@FormParam("acctNumber") String acctNumber,
-			@FormParam("MPRN") long GPRN) {
+	public Response update(@FormParam("acctId") final int acctId,
+			@FormParam("companyName") final String companyName,
+			@FormParam("acctNumber") final String acctNumber,
+			@FormParam("MPRN") final long GPRN) {
 		try {
 			if (!SecurityContextHolder.getContext().getAuthentication()
 					.getName().equals(gasDAO.getAccount(acctId).getUsername())) {
@@ -143,7 +143,7 @@ public class GasAcctService {
 
 	@DELETE
 	@Path("delete/{acctId}")
-	public Response removeUser(@PathParam("acctId") int acctId) {
+	public Response removeUser(@PathParam("acctId") final int acctId) {
 		try {
 			if (!SecurityContextHolder.getContext().getAuthentication()
 					.getName().equals(gasDAO.getAccount(acctId).getUsername())) {

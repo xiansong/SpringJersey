@@ -24,7 +24,7 @@ import com.pwz.model.ElecReading;
 public class JdbcElecReadingDAO extends NamedParameterJdbcDaoSupport implements
 		ElecReadingDAO {
 
-	public int addReading(ElecReading reading) {
+	public int addReading(final ElecReading reading) {
 		StringBuffer sqlSB = new StringBuffer();
 		sqlSB.append("INSERT INTO elec_reading (elecAcctId, dayReading, nightReading, readDate) ");
 		sqlSB.append("VALUES (:elecAcctId, :dayReading, :nightReading, :readDate)");
@@ -36,7 +36,7 @@ public class JdbcElecReadingDAO extends NamedParameterJdbcDaoSupport implements
 		return generatedKeyHolder.getKey().intValue();
 	}
 
-	public ElecReading getReading(int readingId) {
+	public ElecReading getReading(final int readingId) {
 		StringBuffer sqlSB = new StringBuffer();
 		sqlSB.append("SELECT R.readingId, R.elecAcctId, U.username, R.dayReading, R.nightReading, R.readDate ");
 		sqlSB.append("FROM elec_reading as R INNER JOIN elec_account as A INNER JOIN user as U ");
@@ -49,7 +49,7 @@ public class JdbcElecReadingDAO extends NamedParameterJdbcDaoSupport implements
 				new BeanPropertyRowMapper<ElecReading>(ElecReading.class));
 	}
 
-	public List<ElecReading> getReadings(int acctId) {
+	public List<ElecReading> getReadings(final int acctId) {
 		StringBuffer sqlSB = new StringBuffer();
 		sqlSB.append("SELECT R.readingId, R.elecAcctId, U.username, R.dayReading, R.nightReading, R.readDate ");
 		sqlSB.append("FROM elec_reading as R INNER JOIN elec_account as A INNER JOIN user as U ");
@@ -62,7 +62,7 @@ public class JdbcElecReadingDAO extends NamedParameterJdbcDaoSupport implements
 				new BeanPropertyRowMapper<ElecReading>(ElecReading.class));
 	}
 
-	public void deleteReading(int readingId) {
+	public void deleteReading(final int readingId) {
 		String sql = "DELETE FROM elec_reading WHERE readingId = :readingId";
 		SqlParameterSource paramSource = new MapSqlParameterSource("readingId",
 				readingId);

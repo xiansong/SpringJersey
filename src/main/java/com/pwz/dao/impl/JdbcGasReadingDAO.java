@@ -16,15 +16,15 @@ import com.pwz.model.GasReading;
 /**
  * @author Green Lens
  * 
- *         DAO layer doesn't handle Data Access Exception,throw it to front end(rest
- *         services) to handle it
+ *         DAO layer doesn't handle Data Access Exception,throw it to front
+ *         end(rest services) to handle it
  * 
  */
 
 public class JdbcGasReadingDAO extends NamedParameterJdbcDaoSupport implements
 		GasReadingDAO {
 
-	public int addReading(GasReading reading) {
+	public int addReading(final GasReading reading) {
 		StringBuffer sqlSB = new StringBuffer();
 		sqlSB.append("INSERT INTO gas_reading (gasAcctId, reading, readDate) VALUES ");
 		sqlSB.append("(:gasAcctId, :reading, :readDate)");
@@ -36,7 +36,7 @@ public class JdbcGasReadingDAO extends NamedParameterJdbcDaoSupport implements
 		return generatedKeyHolder.getKey().intValue();
 	}
 
-	public GasReading getReading(int readingId) {
+	public GasReading getReading(final int readingId) {
 		StringBuffer sqlSB = new StringBuffer();
 		sqlSB.append("SELECT R.readingId, R.gasAcctId, U.username, R.reading, R.readDate ");
 		sqlSB.append("FROM gas_reading as R INNER JOIN gas_account as A INNER JOIN user as U ");
@@ -49,7 +49,7 @@ public class JdbcGasReadingDAO extends NamedParameterJdbcDaoSupport implements
 				new BeanPropertyRowMapper<GasReading>(GasReading.class));
 	}
 
-	public List<GasReading> getReadings(int gasAcctId) {
+	public List<GasReading> getReadings(final int gasAcctId) {
 		StringBuffer sqlSB = new StringBuffer();
 		sqlSB.append("SELECT R.readingId, R.gasAcctId, U.username, R.reading, R.readDate ");
 		sqlSB.append("FROM gas_reading as R INNER JOIN gas_account as A INNER JOIN user as U ");
@@ -62,7 +62,7 @@ public class JdbcGasReadingDAO extends NamedParameterJdbcDaoSupport implements
 				new BeanPropertyRowMapper<GasReading>(GasReading.class));
 	}
 
-	public void deleteReading(int readingId) {
+	public void deleteReading(final int readingId) {
 		String sql = "DELETE FROM gas_reading WHERE readingId = :readingId";
 		SqlParameterSource paramSource = new MapSqlParameterSource("readingId",
 				readingId);

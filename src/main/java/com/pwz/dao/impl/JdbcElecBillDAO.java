@@ -24,7 +24,7 @@ import com.pwz.model.ElecBill;
 public class JdbcElecBillDAO extends NamedParameterJdbcDaoSupport implements
 		ElecBillDAO {
 
-	public int addBill(ElecBill bill) {
+	public int addBill(final ElecBill bill) {
 		StringBuffer sqlSB = new StringBuffer();
 		sqlSB.append("INSERT INTO elec_bill (elecAcctId, dayBill, nightBill, issuedDate) ");
 		sqlSB.append("VALUES (:elecAcctId, :dayBill, :nightBill, :issuedDate)");
@@ -36,7 +36,7 @@ public class JdbcElecBillDAO extends NamedParameterJdbcDaoSupport implements
 		return generatedKeyHolder.getKey().intValue();
 	}
 
-	public ElecBill getBill(int billId) {
+	public ElecBill getBill(final int billId) {
 		StringBuffer sqlSB = new StringBuffer();
 		sqlSB.append("SELECT B.billId, B.elecAcctId, U.username, B.dayBill, B.nightBill, B.issuedDate ");
 		sqlSB.append("FROM elec_bill AS B INNER JOIN elec_account as A INNER JOIN user as U ");
@@ -49,7 +49,7 @@ public class JdbcElecBillDAO extends NamedParameterJdbcDaoSupport implements
 				new BeanPropertyRowMapper<ElecBill>(ElecBill.class));
 	}
 
-	public List<ElecBill> getBills(int acctId) {
+	public List<ElecBill> getBills(final int acctId) {
 		StringBuffer sqlSB = new StringBuffer();
 		sqlSB.append("SELECT B.billId, B.elecAcctId, U.username, B.dayBill, B.nightBill, B.issuedDate ");
 		sqlSB.append("FROM elec_bill AS B INNER JOIN elec_account as A INNER JOIN user as U ");
@@ -62,7 +62,7 @@ public class JdbcElecBillDAO extends NamedParameterJdbcDaoSupport implements
 				new BeanPropertyRowMapper<ElecBill>(ElecBill.class));
 	}
 
-	public void delete(int billId) {
+	public void delete(final int billId) {
 		String sql = "DELETE FROM elec_bill WHERE billId = :billId";
 		SqlParameterSource paramSource = new MapSqlParameterSource("billId",
 				billId);

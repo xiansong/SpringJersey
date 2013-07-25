@@ -12,17 +12,18 @@ import org.springframework.jdbc.support.KeyHolder;
 
 import com.pwz.dao.GasAcctDAO;
 import com.pwz.model.GasAccount;
+
 /**
  * @author Green Lens
  * 
- *         DAO layer doesn't handle Data Access Exception,throw it to front end(rest
- *         services) to handle it
+ *         DAO layer doesn't handle Data Access Exception,throw it to front
+ *         end(rest services) to handle it
  * 
  */
 public class JdbcGasAcctDAO extends NamedParameterJdbcDaoSupport implements
 		GasAcctDAO {
 
-	public int addAccount(GasAccount account) {
+	public int addAccount(final GasAccount account) {
 		StringBuffer sqlSB = new StringBuffer();
 		sqlSB.append("INSERT INTO gas_account (userId, companyName, acctNumber, GPRN) ");
 		sqlSB.append("VALUES (:userId, :companyName, :acctNumber, :GPRN)");
@@ -34,7 +35,7 @@ public class JdbcGasAcctDAO extends NamedParameterJdbcDaoSupport implements
 		return generatedKeyHolder.getKey().intValue();
 	}
 
-	public GasAccount getAccount(int acctId) {
+	public GasAccount getAccount(final int acctId) {
 		StringBuffer sqlSB = new StringBuffer();
 		sqlSB.append("SELECT A.gasAcctId, A.userId, U.username, A.companyName, A.acctNumber, A.GPRN ");
 		sqlSB.append("FROM gas_account as A INNER JOIN user as U ");
@@ -46,7 +47,7 @@ public class JdbcGasAcctDAO extends NamedParameterJdbcDaoSupport implements
 				new BeanPropertyRowMapper<GasAccount>(GasAccount.class));
 	}
 
-	public void updateAccount(GasAccount account) {
+	public void updateAccount(final GasAccount account) {
 		StringBuffer sqlSB = new StringBuffer();
 		sqlSB.append("UPDATE gas_account ");
 		sqlSB.append("set acctNumber = :acctNumber, companyName=:companyName, GPRN = :GPRN ");
@@ -56,7 +57,7 @@ public class JdbcGasAcctDAO extends NamedParameterJdbcDaoSupport implements
 		getNamedParameterJdbcTemplate().update(sqlSB.toString(), paramSource);
 	}
 
-	public List<GasAccount> listAccounts(int userId) {
+	public List<GasAccount> listAccounts(final int userId) {
 		StringBuffer sqlSB = new StringBuffer();
 		sqlSB.append("SELECT A.gasAcctId, A.userId, U.username, A.companyName, A.acctNumber, A.GPRN ");
 		sqlSB.append("FROM gas_account as A INNER JOIN user as U ");
@@ -68,7 +69,7 @@ public class JdbcGasAcctDAO extends NamedParameterJdbcDaoSupport implements
 				new BeanPropertyRowMapper<GasAccount>(GasAccount.class));
 	}
 
-	public void deleteAccount(int acctId) {
+	public void deleteAccount(final int acctId) {
 		String sql = "DELETE FROM gas_account WHERE gasAcctId = :acctId";
 		SqlParameterSource paramSource = new MapSqlParameterSource("acctId",
 				acctId);

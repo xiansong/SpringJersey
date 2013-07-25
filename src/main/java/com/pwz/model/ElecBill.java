@@ -22,7 +22,7 @@ public class ElecBill implements Serializable{
 		return billId;
 	}
 	
-	public void setBillId(int billId) {
+	public void setBillId(final int billId) {
 		this.billId = billId;
 	}
 	
@@ -30,7 +30,7 @@ public class ElecBill implements Serializable{
 		return elecAcctId;
 	}
 	
-	public void setElecAcctId(int elecAcctId) {
+	public void setElecAcctId(final int elecAcctId) {
 		this.elecAcctId = elecAcctId;
 	}
 
@@ -38,7 +38,7 @@ public class ElecBill implements Serializable{
 		return username;
 	}
 
-	public void setUsername(String username) {
+	public void setUsername(final String username) {
 		this.username = username;
 	}
 	
@@ -46,7 +46,7 @@ public class ElecBill implements Serializable{
 		return dayBill;
 	}
 	
-	public void setDayBill(float dayBill) {
+	public void setDayBill(final float dayBill) {
 		this.dayBill = dayBill;
 		total += dayBill;
 	}
@@ -55,7 +55,7 @@ public class ElecBill implements Serializable{
 		return nightBill;
 	}
 	
-	public void setNightBill(float nightBill) {
+	public void setNightBill(final float nightBill) {
 		this.nightBill = nightBill;
 		total += nightBill;
 	}
@@ -68,7 +68,7 @@ public class ElecBill implements Serializable{
 		return issuedDate;
 	}
 	
-	public void setIssuedDate(Date issuedDate) {
+	public void setIssuedDate(final Date issuedDate) {
 		this.issuedDate = issuedDate;
 	}
 

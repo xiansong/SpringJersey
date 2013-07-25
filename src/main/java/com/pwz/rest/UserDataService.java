@@ -35,7 +35,7 @@ public class UserDataService {
 	@GET
 	@Path("{username}")
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-	public Response getUser(@PathParam("username") String username) {
+	public Response getUser(@PathParam("username") final String username) {
 		try {
 			if (SecurityContextHolder.getContext().getAuthentication()
 					.getName().equals(username)) {
@@ -68,8 +68,8 @@ public class UserDataService {
 	@Path("add")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response register(@FormParam("username") String username,
-			@FormParam("password") String password) {
+	public Response register(@FormParam("username") final String username,
+			@FormParam("password") final String password) {
 		PasswordEncoder encoder = new BCryptPasswordEncoder();
 		User user = new User();
 		user.setUsername(username);
@@ -88,7 +88,7 @@ public class UserDataService {
 	@Path("update")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response update(@FormParam("userId") int userId,
+	public Response update(@FormParam("userId") final int userId,
 			@FormParam("password") String password) {
 		User user = null;
 		try {
@@ -120,7 +120,7 @@ public class UserDataService {
 	@DELETE
 	@Path("delete/{userId}")
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response removeUser(@PathParam("userId") int userId) {
+	public Response removeUser(@PathParam("userId") final int userId) {
 		try {
 			if (!SecurityContextHolder.getContext().getAuthentication()
 					.getName().equals(userDAO.getUser(userId).getUsername())) {

@@ -16,15 +16,15 @@ import com.pwz.model.ElecAccount;
 /**
  * @author Green Lens
  * 
- *         DAO layer doesn't handle Data Access Exception,throw it to front end(rest
- *         services) to handle it
+ *         DAO layer doesn't handle Data Access Exception,throw it to front
+ *         end(rest services) to handle it
  * 
  */
 
 public class JdbcElecAcctDAO extends NamedParameterJdbcDaoSupport implements
 		ElecAcctDAO {
 
-	public int addAccount(ElecAccount account) {
+	public int addAccount(final ElecAccount account) {
 		StringBuffer sqlSB = new StringBuffer();
 		sqlSB.append("INSERT INTO elec_account (userId, companyName, acctNumber, MPRN) ");
 		sqlSB.append("VALUES (:userId, :companyName, :acctNumber, :MPRN)");
@@ -36,7 +36,7 @@ public class JdbcElecAcctDAO extends NamedParameterJdbcDaoSupport implements
 		return generatedKeyHolder.getKey().intValue();
 	}
 
-	public ElecAccount getAccount(int acctId) {
+	public ElecAccount getAccount(final int acctId) {
 		StringBuffer sqlSB = new StringBuffer();
 		sqlSB.append("SELECT A.elecAcctId, A.userId, U.username, A.companyName, A.acctNumber, A.MPRN ");
 		sqlSB.append("FROM elec_account as A INNER JOIN user as U ON A.userId = U.userId ");
@@ -48,7 +48,7 @@ public class JdbcElecAcctDAO extends NamedParameterJdbcDaoSupport implements
 				new BeanPropertyRowMapper<ElecAccount>(ElecAccount.class));
 	}
 
-	public void updateAccount(ElecAccount account) {
+	public void updateAccount(final ElecAccount account) {
 		StringBuffer sqlSB = new StringBuffer();
 		sqlSB.append("UPDATE elec_account ");
 		sqlSB.append("SET acctNumber = :acctNumber, companyName=:companyName, MPRN = :MPRN ");
@@ -58,7 +58,7 @@ public class JdbcElecAcctDAO extends NamedParameterJdbcDaoSupport implements
 		getNamedParameterJdbcTemplate().update(sqlSB.toString(), paramSource);
 	}
 
-	public List<ElecAccount> listAccounts(int userId) {
+	public List<ElecAccount> listAccounts(final int userId) {
 		StringBuffer sqlSB = new StringBuffer();
 		sqlSB.append("SELECT A.elecAcctId, A.userId, U.username, A.companyName, A.acctNumber, A.MPRN ");
 		sqlSB.append("FROM elec_account as A INNER JOIN user as U ON A.userId = U.userId ");
@@ -70,7 +70,7 @@ public class JdbcElecAcctDAO extends NamedParameterJdbcDaoSupport implements
 				new BeanPropertyRowMapper<ElecAccount>(ElecAccount.class));
 	}
 
-	public void deleteAccount(int acctId) {
+	public void deleteAccount(final int acctId) {
 		String sql = "DELETE FROM elec_account WHERE elecAcctId = :acctId";
 		SqlParameterSource paramSource = new MapSqlParameterSource("acctId",
 				acctId);

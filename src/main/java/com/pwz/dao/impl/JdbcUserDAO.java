@@ -16,15 +16,15 @@ import com.pwz.model.User;
 /**
  * @author Green Lens
  * 
- *         DAO layer doesn't handle Data Access Exception,throw it to front end(rest
- *         services) to handle it
+ *         DAO layer doesn't handle Data Access Exception,throw it to front
+ *         end(rest services) to handle it
  * 
  */
 
 public class JdbcUserDAO extends NamedParameterJdbcDaoSupport implements
 		UserDAO {
 
-	public User getUser(int userId) {
+	public User getUser(final int userId) {
 		// TODO Auto-generated method stub
 		String sql = "select userId,username,password, enabled from user where userId = :userId";
 		SqlParameterSource paramSource = new MapSqlParameterSource("userId",
@@ -33,7 +33,7 @@ public class JdbcUserDAO extends NamedParameterJdbcDaoSupport implements
 				new BeanPropertyRowMapper<User>(User.class));
 	}
 
-	public User getUser(String username) {
+	public User getUser(final String username) {
 		String sql = "select userId,username,password, enabled from user where username = :username";
 		SqlParameterSource paramSource = new MapSqlParameterSource("username",
 				username);
@@ -41,7 +41,7 @@ public class JdbcUserDAO extends NamedParameterJdbcDaoSupport implements
 				paramSource, new BeanPropertyRowMapper<User>(User.class));
 	}
 
-	public int register(User user) {
+	public int register(final User user) {
 		String sql = "INSERT INTO user(username, password, enabled) VALUES (:username, :password, true)";
 		SqlParameterSource paramSource = new BeanPropertySqlParameterSource(
 				user);
@@ -57,14 +57,14 @@ public class JdbcUserDAO extends NamedParameterJdbcDaoSupport implements
 				new BeanPropertyRowMapper<User>(User.class));
 	}
 
-	public void delete(int userId) {
+	public void delete(final int userId) {
 		String sql = "DELETE FROM user WHERE userId = :userId";
 		SqlParameterSource paramSource = new MapSqlParameterSource("userId",
 				userId);
 		getNamedParameterJdbcTemplate().update(sql, paramSource);
 	}
 
-	public void update(User user) {
+	public void update(final User user) {
 		String sql = "UPDATE user SET password = :password WHERE userId = :userId";
 		SqlParameterSource paramSource = new BeanPropertySqlParameterSource(
 				user);

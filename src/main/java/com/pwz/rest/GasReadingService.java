@@ -35,9 +35,9 @@ public class GasReadingService {
 	@POST
 	@Path("add")
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response add(@FormParam("gasAcctId") int gasAcctId,
-			@FormParam("reading") int reading,
-			@FormParam("readDate") Date readDate) {
+	public Response add(@FormParam("gasAcctId") final int gasAcctId,
+			@FormParam("reading") final int reading,
+			@FormParam("readDate") final Date readDate) {
 		try {
 			if (!SecurityContextHolder.getContext().getAuthentication()
 					.getName()
@@ -65,7 +65,7 @@ public class GasReadingService {
 	@GET
 	@Path("{readingId}")
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-	public Response getReading(@PathParam("readingId") int readingId) {
+	public Response getReading(@PathParam("readingId") final int readingId) {
 		try {
 			GasReading gasReading = gasRDAO.getReading(readingId);
 			if (gasReading.getUsername().equals(
@@ -86,7 +86,7 @@ public class GasReadingService {
 	@GET
 	@Path("account/{gasAcctId}")
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-	public Response getReadings(@PathParam("gasAcctId") int gasAcctId) {
+	public Response getReadings(@PathParam("gasAcctId") final int gasAcctId) {
 		try {
 			if (!SecurityContextHolder.getContext().getAuthentication()
 					.getName()
